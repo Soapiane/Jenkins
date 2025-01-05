@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        SLACK_CHANNEL = '#chat'  // Replace with your channel
+    }
+
     stages {
 
         stage('Test') {
@@ -59,6 +63,30 @@ pipeline {
             steps {
                 echo 'Hello World'
             }
+        }
+    }
+
+    post {
+        success {
+            slackSend(
+                channel: SLACK_CHANNEL,
+                color: 'good',
+                message: "✅ Build #${env.BUILD_NUMBER} completed successfully!\nBuild URL: ${env.BUILD_URL}"
+            )
+        }
+        failure {
+            slackSend(
+                channel: SLACK_CHANNEL,
+                color: 'danger',
+                message: "❌ Build #${env.BUILD_NUMBER} failed!\nBuild URL: ${env.BUILD_URL}"
+            )
+        }
+        unstable {
+            slackSend(
+                channel: SLACK_CHANNEL,
+                color: 'warning',
+                message: "⚠️ Build #${env.BUILD_NUMBER} is unstable!\nBuild URL: ${env.BUILD_URL}"
+            )
         }
     }
 }
