@@ -59,7 +59,7 @@ pipeline {
                       }
                   }
 
-        stage('Hello World') {
+        stage('Deploy') {
             steps {
                 echo 'Hello World'
             }
