@@ -39,7 +39,7 @@ jacocoTestReport {
 sonar {
   properties {
     property "sonar.projectKey", "Sonar-Sofiane"
-    property "sonar.host.url", "http://197.140.142.82:9000/"
+    property "sonar.host.url", "http://127.0.0.1:9000/"
     property "sonar.sources", "src/main/java"
   }
 
