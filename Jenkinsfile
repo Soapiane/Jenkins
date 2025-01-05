@@ -40,10 +40,10 @@ pipeline {
                       steps {
                           script {
                               // Generate the JAR file
-                              sh './gradlew jar'
+                              bat './gradlew jar'
 
                               // Generate the documentation
-                              sh './gradlew javadoc'
+                              bat './gradlew javadoc'
                           }
                       }
                       post {
