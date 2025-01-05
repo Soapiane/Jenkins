@@ -8,11 +8,11 @@ pipeline {
                 script{
                     bat './gradlew test'
                 }
-                post {
-                    always {
-                        junit 'build/test-results/test/*.xml'
-                        cucumber 'build/reports/cucumber/*.json'
-                    }
+            }
+            post {
+                always {
+                    junit 'build/test-results/test/*.xml'
+                    cucumber 'build/reports/cucumber/*.json'
                 }
             }
         }
