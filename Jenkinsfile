@@ -36,6 +36,25 @@ pipeline {
              }
          }
 
+                  stage('Build') {
+                      steps {
+                          script {
+                              // Generate the JAR file
+                              sh './gradlew jar'
+
+                              // Generate the documentation
+                              sh './gradlew javadoc'
+                          }
+                      }
+                      post {
+                          success {
+                              // Archive the generated JAR and documentation
+                              archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
+                              archiveArtifacts artifacts: 'build/docs/javadoc/**/*', fingerprint: true
+                          }
+                      }
+                  }
+
         stage('Hello World') {
             steps {
                 echo 'Hello World'
