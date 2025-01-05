@@ -6,14 +6,14 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-                    sh './gradlew test'
+                    bat './gradlew test'
                 }
             }
         }
 
         stage('SonarQube') {
             steps {
-                sh './gradlew sonar'
+                bat './gradlew sonar'
             }
         }
 
