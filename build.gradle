@@ -46,7 +46,7 @@ sonar {
 }
 
 tasks.test {
-  finalizedBy jacocoTestReport, project.tasks["sonar"]
+  finalizedBy jacocoTestReport
 }
 
 publishing {
