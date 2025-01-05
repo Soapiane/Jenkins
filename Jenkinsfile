@@ -5,9 +5,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh './gradlew test'
-                junit '**/build/test-results/test/*.xml' // Adjust path based on your project structure
+                script{
+                    echo 'Running tests...'
+                    sh './gradlew test'
+                }
             }
         }
 
