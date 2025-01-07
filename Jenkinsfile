@@ -68,6 +68,12 @@ pipeline {
 
     post {
         success {
+
+              mail(
+                  to: 'ls_yekene@esi.dz',
+                  subject: 'Deployment Success',
+                  body: 'The deployment was successful.'
+              )
             slackSend(
                 channel: SLACK_CHANNEL,
                 color: 'good',
