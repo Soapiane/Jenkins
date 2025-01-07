@@ -58,28 +58,11 @@ jobs:
       - name: Build for SonarQube
         run: ./gradlew build -x test
 
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        with:
-          projectBaseDir: .
-          args: >
-            -X
-            -Dsonar.projectKey=Sonar-Sofiane
-            -Dsonar.java.binaries=build/classes/java/main
-            -Dsonar.java.sources=src/main/java
-            -Dsonar.java.binaries= **/*.java
-            -Dsonar.java.tests=src/test/java
-            -Dsonar.sources=src/main/java
-            -Dsonar.tests=src/test/java
-            -Dsonar.inclusions=**/*.java
-            -Dsonar.java.test.binaries=build/classes/java/test
-            -Dsonar.coverage.exclusions=**/*Test.java
-            -Dsonar.coverage.exclusions=**/generated/**
-            -Dsonar.cpd.exclusions=**/*Test.java
-            -Dsonar.skipCompile=true
+      - name: Run SonarQube analysis
+        run: ./gradlew sonarqube -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
         env:
-          SONAR_TOKEN: 4a8a2cee07a71ecb967e962545df44e892836a53
-          SONAR_HOST_URL: https://aae6-41-111-189-195.ngrok-free.app
+          SONAR_HOST_URL: 'http://197.140.142.82:9000'
+          SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
 
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
