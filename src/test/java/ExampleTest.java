@@ -3,7 +3,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "features",plugin={"json:reports/example-report.json"}
+@CucumberOptions(features = "src/test/resources/features",plugin={"json:reports/example-report.json"}
 )
 public class ExampleTest {
 

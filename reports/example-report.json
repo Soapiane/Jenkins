@@ -11,7 +11,7 @@
         "steps": [
           {
             "result": {
-              "duration": 2987900,
+              "duration": 2978300,
               "status": "passed"
             },
             "line": 3,
@@ -24,7 +24,7 @@
         ]
       },
       {
-        "start_timestamp": "2025-01-07T15:26:45.865Z",
+        "start_timestamp": "2025-01-07T15:36:25.170Z",
         "line": 5,
         "name": "Determinant",
         "description": "",
@@ -34,7 +34,7 @@
         "steps": [
           {
             "result": {
-              "duration": 1983200,
+              "duration": 2994000,
               "status": "passed"
             },
             "line": 6,
@@ -76,7 +76,7 @@
           },
           {
             "result": {
-              "duration": 2010200,
+              "duration": 1993700,
               "status": "passed"
             },
             "line": 11,
@@ -115,7 +115,7 @@
         ]
       },
       {
-        "start_timestamp": "2025-01-07T15:26:45.946Z",
+        "start_timestamp": "2025-01-07T15:36:25.259Z",
         "line": 14,
         "name": "Transpose",
         "description": "",
@@ -162,7 +162,7 @@
           },
           {
             "result": {
-              "duration": 1994400,
+              "duration": 1009900,
               "status": "passed"
             },
             "line": 20,
@@ -206,6 +206,7 @@
         "steps": [
           {
             "result": {
+              "duration": 996400,
               "status": "passed"
             },
             "line": 3,
@@ -218,7 +219,7 @@
         ]
       },
       {
-        "start_timestamp": "2025-01-07T15:26:45.950Z",
+        "start_timestamp": "2025-01-07T15:36:25.263Z",
         "line": 26,
         "name": "Inverse",
         "description": "",
@@ -228,7 +229,6 @@
         "steps": [
           {
             "result": {
-              "duration": 995400,
               "status": "passed"
             },
             "line": 27,
@@ -312,7 +312,7 @@
         ]
       },
       {
-        "start_timestamp": "2025-01-07T15:26:45.953Z",
+        "start_timestamp": "2025-01-07T15:36:25.266Z",
         "line": 37,
         "name": "Cofactor",
         "description": "",
@@ -389,7 +389,7 @@
     "description": "",
     "id": "matrix",
     "keyword": "Feature",
-    "uri": "file:features/matrix.feature",
+    "uri": "file:src/test/resources/features/matrix.feature",
     "tags": []
   }
 ]
