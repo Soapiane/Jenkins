@@ -67,13 +67,14 @@ jobs:
             -Dsonar.projectKey=Sonar-Sofiane
             -Dsonar.java.binaries=build/classes/java/main
             -Dsonar.java.sources=src/main/java
+            -Dsonar.java.binaries= **/*.java
             -Dsonar.java.tests=src/test/java
-            -Dsonar.binaries=build/classes/java/main
             -Dsonar.sources=src/main/java
             -Dsonar.tests=src/test/java
             -Dsonar.test.inclusions=**/*Test.java
             -Dsonar.java.test.binaries=build/classes/java/test
             -Dsonar.coverage.exclusions=**/*Test.java
+            -Dsonar.coverage.exclusions=**/generated/**
             -Dsonar.cpd.exclusions=**/*Test.java
             -Dsonar.java.libraries=build/libs/*.jar
             -Dsonar.skipCompile=true
