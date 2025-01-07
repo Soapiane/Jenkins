@@ -64,6 +64,14 @@ jobs:
           SONAR_HOST_URL: 'http://197.140.142.82:9000'
           SONAR_LOGIN: "b532d297b16e6077d59df904c6b2dd103600d4a9"
 
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: "b532d297b16e6077d59df904c6b2dd103600d4a9"
+          SONAR_HOST_URL: 'http://197.140.142.82:9000'
+
       - name: Build
         run: |
           ./gradlew jar
