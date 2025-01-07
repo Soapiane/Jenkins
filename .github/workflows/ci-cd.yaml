@@ -65,6 +65,9 @@ jobs:
           args: >
             -X
             -Dsonar.projectKey=Sonar-Sofiane
+            -Dsonar.binaries=build/classes/java/main
+            -Dsonar.sources=src/main/java
+            -Dsonar.tests=src/test/java
             -Dsonar.java.binaries=build/classes/java/main
             -Dsonar.java.sources=src/main/java
             -Dsonar.java.tests=src/test/java
