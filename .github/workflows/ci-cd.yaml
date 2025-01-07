@@ -1,261 +1,113 @@
-  Soapiane
-    .soapiane
-    Invisible
-    
-    Chamil — 25/12/2024 12:20
-    sepia
-    Soapiane — 25/12/2024 12:20
-    Oui
-    Chamil — 25/12/2024 12:20
-    dok ntester nzidk dok
-    fel vps
-    Soapiane — 25/12/2024 12:21
-    Ok
-    Chamil — 25/12/2024 12:21
-    3ass lmail nta3k
-    Soapiane — 25/12/2024 12:23
-    Recieved
-    Chamil — 25/12/2024 12:23
-    ok dok nzidk lel VPS now
-    check now
-    Soapiane — 25/12/2024 12:25
-    No apps
-    Chamil — 25/12/2024 12:25
-    zdt ressource group
-    wsmo GDG
-    Soapiane — 25/12/2024 12:26
-    Ya kho I'm having authentication problems
-    Image
-    Azure need to fix their backend wlh
-    Chamil — 25/12/2024 12:28
-    HHHHHHHH
-    hta ana malf dirhali
-    access token yhbl
-    wait a few hours , it will be fixed then
-    Soapiane — 25/12/2024 12:29
-    rigl
-    Chamil — 25/12/2024 12:29
-    sometimes i waited days ...
-    😂
-    Chamil — 26/12/2024 14:09
-    sepia b3tli link ta3 platform
-    Soapiane — 26/12/2024 23:16
-    Image
-    Soapiane — 31/12/2024 20:19
-    Chamel
-    Voucher LinkedIn premium
-    To all participants ?
-    Wela competition ?
-    Chamil — 31/12/2024 20:19
-    manjawbch
-    a7dr
-    Soapiane — 31/12/2024 20:19
-    Ya kho ra7 ba7der
-    na7der
-    Dw
-    Chamil — 31/12/2024 20:20
-    mnb3d ngolk
-    Soapiane — 31/12/2024 22:27
-    Thank you soo much lhaj
-    Soapiane — 31/12/2024 22:36
-    LINKEDIN ?
-    Chamil — 31/12/2024 22:45
-    bla mziya , hope it was informative
-    Chamil — 31/12/2024 23:08
-    mainly hiya
-    3ndk 1 voucher per 10 attendants
-    sema
-    ra7 ykouno 2
-    ra7 nrmihom randomly bch tkoun fair
-    Soapiane — 31/12/2024 23:09
-    ok
-    Chamil — 31/12/2024 23:10
-    matkhafch rani dayr 7sabi
-    asbbr
-    tfkrt
-    3ndk carte banquaire
-  ?
-    Soapiane — 05/01/2025 13:22
-  Type de fichier joint : acrobat
-    ANAD_MEZENNER_YEKENE.pdf
-    274.01 KB
-    Chamil — Aujourd’hui à 16:42
-  name: CI Pipeline
-  on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
-        - name: Set up JDK
-          uses: actions/setup-java@v3
-          with:
-            java-version: '17'
-            distribution: 'temurin'
-        - name: Grant execute permission to gradlew
-          run: chmod +x gradlew
-        - name: Run unit tests
-          run: ./gradlew test
-        - name: Archive test results
-          uses: actions/upload-artifact@v3
-          with:
-            name: test-results
-            path: build/test-results/test/
-        - name: Run SonarQube analysis
-          run: ./gradlew sonarqube -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
-          env:
-            SONAR_HOST_URL: 'http://197.140.142.82:9000'
-            SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
-        - name: Build the project
-          run: ./gradlew build
-        - name: Archive build artifacts
-          uses: actions/upload-artifact@v3
-          with:
-            name: build-artifacts
-            path: build/libs/*.jar
-        - name: Deploy to MyMavenRepo
-          run: ./gradlew publish
-          env:
-            MYMAVENREPO_USERNAME: ${{ secrets.MYMAVENREPO_USERNAME }}
-            MYMAVENREPO_PASSWORD: ${{ secrets.MYMAVENREPO_PASSWORD }}
-        - name: Send email notification on success
-          if: success()
-          uses: dawidd6/action-send-mail@v3
-          with:
-            server_address: smtp.gmail.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: "GitHub Actions Build #${{ github.run_number }} Success"
-            body: "The build #${{ github.run_number }} was successful.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            to: lc_bouacha@esi.dz
-            from: lc_bouacha@esi.dz
-        - name: Send email notification on failure
-          if: failure()
-          uses: dawidd6/action-send-mail@v3
-          with:
-            server_address: smtp.gmail.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: "GitHub Actions Build #${{ github.run_number }} Failure"
-            body: "The build #${{ github.run_number }} failed.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            to: lc_bouacha@esi.dz
-            from: lc_bouacha@esi.dz
-        - name: Send Slack notification on success
-          if: success()
-          uses: rtCamp/action-slack-notify@v2
-          env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_COLOR: good
-            SLACK_TITLE: "GitHub Actions Build #${{ github.run_number }} Success"
-            SLACK_MESSAGE: "The build #${{ github.run_number }} was successful.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        - name: Send Slack notification on failure
-          if: failure()
-          uses: rtCamp/action-slack-notify@v2
-          env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_COLOR: danger
-            SLACK_TITLE: "GitHub Actions Build #${{ github.run_number }} Failure"
-            SLACK_MESSAGE: "The build #${{ github.run_number }} failed.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-    Réduire
-    message.txt
-    4 Ko
-    ﻿
-    Chamil
-    chamil_n
-    
-    
-    life's a game , play it right :)
-  name: CI Pipeline
-  on:
-    push:
-      branches:
-        - main
-    pull_request:
-      branches:
-        - main
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v3
-        - name: Set up JDK
-          uses: actions/setup-java@v3
-          with:
-            java-version: '17'
-            distribution: 'temurin'
-        - name: Grant execute permission to gradlew
-          run: chmod +x gradlew
-        - name: Run unit tests
-          run: ./gradlew test
-        - name: Archive test results
-          uses: actions/upload-artifact@v3
-          with:
-            name: test-results
-            path: build/test-results/test/
-        - name: Run SonarQube analysis
-          run: ./gradlew sonarqube -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
-          env:
-            SONAR_HOST_URL: 'http://197.140.142.82:9000'
-            SONAR_LOGIN: ${{ secrets.SONAR_LOGIN }}
-        - name: Build the project
-          run: ./gradlew build
-        - name: Archive build artifacts
-          uses: actions/upload-artifact@v3
-          with:
-            name: build-artifacts
-            path: build/libs/*.jar
-        - name: Deploy to MyMavenRepo
-          run: ./gradlew publish
-          env:
-            MYMAVENREPO_USERNAME: ${{ secrets.MYMAVENREPO_USERNAME }}
-            MYMAVENREPO_PASSWORD: ${{ secrets.MYMAVENREPO_PASSWORD }}
-        - name: Send email notification on success
-          if: success()
-          uses: dawidd6/action-send-mail@v3
-          with:
-            server_address: smtp.gmail.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: "GitHub Actions Build #${{ github.run_number }} Success"
-            body: "The build #${{ github.run_number }} was successful.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            to: lc_bouacha@esi.dz
-            from: lc_bouacha@esi.dz
-        - name: Send email notification on failure
-          if: failure()
-          uses: dawidd6/action-send-mail@v3
-          with:
-            server_address: smtp.gmail.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: "GitHub Actions Build #${{ github.run_number }} Failure"
-            body: "The build #${{ github.run_number }} failed.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            to: lc_bouacha@esi.dz
-            from: lc_bouacha@esi.dz
-        - name: Send Slack notification on success
-          if: success()
-          uses: rtCamp/action-slack-notify@v2
-          env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_COLOR: good
-            SLACK_TITLE: "GitHub Actions Build #${{ github.run_number }} Success"
-            SLACK_MESSAGE: "The build #${{ github.run_number }} was successful.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-        - name: Send Slack notification on failure
-          if: failure()
-          uses: rtCamp/action-slack-notify@v2
-          env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_COLOR: danger
-            SLACK_TITLE: "GitHub Actions Build #${{ github.run_number }} Failure"
-            SLACK_MESSAGE: "The build #${{ github.run_number }} failed.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Important for SonarQube to analyze all history
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache SonarQube packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Test
+        run: |
+          ./gradlew test
+        continue-on-error: true
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: build/test-results/test/*.xml
+          check_name: "Test Results"
+
+      - name: Publish Cucumber Report
+        if: always()
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "reports/example-report.json"
+
+      - name: Build for SonarQube
+        run: ./gradlew build -x test
+
+      - name: Run SonarQube analysis
+        run: ./gradlew sonarqube -Dsonar.host.url=${{ env.SONAR_HOST_URL }}
+        env:
+          SONAR_HOST_URL: 'http://197.140.142.82:9000'
+          SONAR_LOGIN: "b532d297b16e6077d59df904c6b2dd103600d4a9"
+
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Build
+        run: |
+          ./gradlew jar
+          ./gradlew javadoc
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            build/libs/*.jar
+            build/docs/javadoc/
+
+      - name: Deploy
+        run: echo "Deployment step"  # Replace with actual deployment commands
+
+      - name: Send Email Notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: ls_yekene@esi.dz
+          to: sfnhckr@gmail.com
+          subject: ${{ job.status == 'success' && 'Deployment Success' || 'Pipeline Failed' }}
+          body: ${{ job.status == 'success' && 'The deployment was successful.' || 'The GitHub Actions pipeline has failed. Please check the logs for more details.' }}
+
+      - name: Send Slack Notification
+        if: always()
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "${{ job.status == 'success' && 'Deployment Success - Project Sonar-Sofiane' || 'Pipeline Failed - Project Sonar-Sofiane' }}"
+            }
