@@ -56,16 +56,19 @@ jobs:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           path: "reports/example-report.json"
 
+
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
         with:
           projectBaseDir: .
           args: >
-            -Dsonar.projectKey=4a8a2cee07a71ecb967e962545df44e892836a53
+            -Dsonar.projectKey=Sonar-Sofiane
             -Dsonar.java.binaries=build/classes/java/main
+            -Dsonar.java.sources=src/main/java
+            -Dsonar.java.tests=src/test/java
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: 4a8a2cee07a71ecb967e962545df44e892836a53
+          SONAR_HOST_URL: https://aae6-41-111-189-195.ngrok-free.app
 
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
