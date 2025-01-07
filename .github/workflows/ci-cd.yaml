@@ -93,10 +93,10 @@ jobs:
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.MAIL_SERVER }}
-          server_port: 587
+          server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
-          from: sender@example.com
+          from: ls_yekene@esi.dz
           to: sfnhckr@gmail.com
           subject: ${{ job.status == 'success' && 'Deployment Success' || 'Pipeline Failed' }}
           body: ${{ job.status == 'success' && 'The deployment was successful.' || 'The GitHub Actions pipeline has failed. Please check the logs for more details.' }}
