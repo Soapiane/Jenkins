@@ -70,7 +70,7 @@ pipeline {
         success {
 
               mail(
-                  to: 'ls_yekene@esi.dz',
+                  to: 'sfnhckr@gmail.com',
                   subject: 'Deployment Success',
                   body: 'The deployment was successful.'
               )
