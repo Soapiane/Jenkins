@@ -63,6 +63,7 @@ jobs:
         with:
           projectBaseDir: .
           args: >
+            -X
             -Dsonar.projectKey=Sonar-Sofiane
             -Dsonar.java.binaries=build/classes/java/main
             -Dsonar.java.sources=src/main/java
