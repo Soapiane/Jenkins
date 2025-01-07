@@ -107,10 +107,10 @@ jobs:
       - name: Send Slack Notification
         if: always()
         uses: slackapi/slack-github-action@v2.0.0
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         with:
+          webhook: ${{ secrets.SLACK_WEBHOOK }}
+          webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ job.status == 'success' && '✅ Build completed successfully!' || '❌ Build failed!' }}\nBuild URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "text": "${{ job.status == 'success' && 'Deployment Success - Project mezenner-ci-cd' || 'Pipeline Failed - Project mezenner-ci-cd' }}"
             }
