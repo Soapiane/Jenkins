@@ -69,6 +69,12 @@ jobs:
             -Dsonar.binaries=build/classes/java/main
             -Dsonar.sources=src/main/java
             -Dsonar.tests=src/test/java
+            -Dsonar.test.inclusions=**/*Test.java
+            -Dsonar.java.test.binaries=build/classes/java/test
+            -Dsonar.coverage.exclusions=**/*Test.java
+            -Dsonar.cpd.exclusions=**/*Test.java
+            -Dsonar.java.libraries=build/libs/*.jar
+            -Dsonar.skipCompile=true
         env:
           SONAR_TOKEN: 4a8a2cee07a71ecb967e962545df44e892836a53
           SONAR_HOST_URL: https://aae6-41-111-189-195.ngrok-free.app
