@@ -125,5 +125,5 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "text": "${{ job.status == 'success' && 'Deployment Success - Project mezenner-ci-cd' || 'Pipeline Failed - Project mezenner-ci-cd' }}"
+              "text": "${{ job.status == 'success' && 'Deployment Success - Project Sonar-Sofiane' || 'Pipeline Failed - Project Sonar-Sofiane' }}"
             }
