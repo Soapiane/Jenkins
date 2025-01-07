@@ -38,11 +38,6 @@ jobs:
         with:
           name: build-artifacts
           path: build/libs/*.jar
-      - name: Deploy to MyMavenRepo
-        run: ./gradlew publish
-        env:
-          MYMAVENREPO_USERNAME: ${{ secrets.MYMAVENREPO_USERNAME }}
-          MYMAVENREPO_PASSWORD: ${{ secrets.MYMAVENREPO_PASSWORD }}
       - name: Send email notification on success
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -53,8 +48,8 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "GitHub Actions Build #${{ github.run_number }} Success"
           body: "The build #${{ github.run_number }} was successful.\n\nCheck it out: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          to: lc_bouacha@esi.dz
-          from: lc_bouacha@esi.dz
+          to: ls_yekene@esi.dz
+          from: ls_yekene@esi.dz
       - name: Send email notification on failure
         if: failure()
         uses: dawidd6/action-send-mail@v3
